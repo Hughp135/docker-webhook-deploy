@@ -1,14 +1,18 @@
 var express = require('express');
 var app = express();
-var fs = require('fs');
+// var fs = require('fs');
 var exec = require('child_process').exec;
 
-var key = fs.readFileSync('key.pem');
-var cert = fs.readFileSync( 'cert.pem' );
-var options = {
-  key: key,
-  cert: cert,
-};
+// var key = fs.readFileSync('key.pem');
+// var cert = fs.readFileSync( 'cert.pem' );
+// var options = {
+//   key: key,
+//   cert: cert,
+// };
+
+app.get('/', (req, res) => {
+  res.send('success');
+});
 
 app.post('/deploy', (req, res) => {
   console.log(req.body);
@@ -22,7 +26,7 @@ app.post('/deploy', (req, res) => {
   });
 });
 
-var https = require('https');
-https.createServer(options, app).listen(957);
+var http = require('http');
+http.createServer(app).listen(957);
 
 console.log('Server listening on 957');
